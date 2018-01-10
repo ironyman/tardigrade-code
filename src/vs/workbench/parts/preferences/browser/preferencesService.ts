@@ -197,7 +197,20 @@ export class PreferencesService extends Disposable implements IPreferencesServic
 
 	openUserStylesheet(options?: IEditorOptions, position?: EditorPosition): TPromise<IEditor> {
 		const resource = URI.file(this.environmentService.appUserStylesheetPath);
-		const defaultContent = '/* Place your CSS rules here. */\n';
+		const defaultContent = `/* Place your CSS rules here. */
+.monaco-editor::after {
+	content: "";
+	background: url(https://farm6.staticflickr.com/5575/14829959040_977a474cf6_o_d.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	opacity: .1;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	pointer-events: none;
+}`;
 
 		return this.createIfNotExists(resource, defaultContent)
 			.then(() => <EditorInput>this.editorService.createInput({ resource }))
